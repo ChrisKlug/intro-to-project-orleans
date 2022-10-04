@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocationTracking.Silo", "Lo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocationTracking.Simulator", "LocationTracking.Simulator\LocationTracking.Simulator.csproj", "{C259B85C-0A7B-42BF-9123-64A79C846825}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocationTracking.Api", "LocationTracking.Api\LocationTracking.Api.csproj", "{47FB41E8-09C0-4012-A2C2-79E7780A284F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{C259B85C-0A7B-42BF-9123-64A79C846825}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C259B85C-0A7B-42BF-9123-64A79C846825}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C259B85C-0A7B-42BF-9123-64A79C846825}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47FB41E8-09C0-4012-A2C2-79E7780A284F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47FB41E8-09C0-4012-A2C2-79E7780A284F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47FB41E8-09C0-4012-A2C2-79E7780A284F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47FB41E8-09C0-4012-A2C2-79E7780A284F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
