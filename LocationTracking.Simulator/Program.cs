@@ -5,6 +5,7 @@ using Microsoft.Extensions.Hosting;
 using Orleans;
 using Orleans.Hosting;
 using System.Net;
+using System.Net.Http.Json;
 
 Console.WriteLine("Simulating GPS positioning");
 
@@ -32,7 +33,9 @@ for (int i = 1; i <= 10; i++)
 
     tasks.Add(new LocationSimulator(name, async (point) =>
     {
+
         await grain.UpdateLocation(point.ToLocation());
+        // await new HttpClient().PostAsJsonAsync($"https://localhost:7149/api/client/{name}/locations", new { DateTime = DateTime.UtcNow, point.Latitude, point.Longitude });
 
     }).Start(cts.Token));
 }
