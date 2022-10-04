@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
@@ -12,6 +12,7 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.0" />
 		<PackageReference Include="Microsoft.Orleans.Clustering.AzureStorage" Version="4.0.0-preview2" />
 		<PackageReference Include="Microsoft.Orleans.Server" Version="4.0.0-preview2" />
+		<PackageReference Include="OrleansDashboard" Version="4.0.0-preview3" />
 	</ItemGroup>
 
 	<ItemGroup>
