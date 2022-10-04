@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Orleans.Server" Version="4.0.0-preview2" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\LocationTracking.Grains\LocationTracking.Grains.csproj" />
+	</ItemGroup>
+
+</Project>
