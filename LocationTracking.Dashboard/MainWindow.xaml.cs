@@ -16,6 +16,8 @@ namespace LocationTracking.Dashboard
     {
         private IHost? host = null;
         private Dictionary<string, Pushpin> pins = new Dictionary<string, Pushpin>();
+        private DashboardObserver observer;
+        private IDashboardObserver observerRef;
 
         public MainWindow()
         {
@@ -59,11 +61,17 @@ namespace LocationTracking.Dashboard
 
         private async Task OnHostStarted(IHost host)
         {
-            // Add observer
+            var clusterClient = host.Services.GetRequiredService<IClusterClient>();
+            var dashboardGrain = clusterClient.GetGrain<IDashboardGrain>(Guid.Empty);
+            observer = new DashboardObserver(UpdatePositions);
+            observerRef = clusterClient.CreateObjectReference<IDashboardObserver>(observer);
+            await dashboardGrain.Subscribe(observerRef);
         }
         private async Task OnHostStopping(IHost host)
         {
-            // Remove observer
+            var clusterClient = host.Services.GetRequiredService<IClusterClient>();
+            var dashboardGrain = clusterClient.GetGrain<IDashboardGrain>(Guid.Empty);
+            await dashboardGrain.Unsubscribe(observerRef);
         }
         private void UpdatePositions((string ClientId, Grains.Location Location)[] positions)
         {
@@ -81,6 +89,15 @@ namespace LocationTracking.Dashboard
             });
         }
 
-        // Add Dashboard Observer
+        private class DashboardObserver : IDashboardObserver
+        {
+            private readonly Action<(string ClientId, Grains.Location Location)[]> onUpdate;
+
+            public DashboardObserver(Action<(string ClientId, Grains.Location Location)[]> onUpdate)
+                => this.onUpdate = onUpdate;
+
+            public void OnPositionsUpdated((string ClientId, Grains.Location Location)[] positions)
+                => onUpdate(positions);
+        }
     }
 }
