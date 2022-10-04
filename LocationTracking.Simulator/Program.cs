@@ -5,7 +5,6 @@ using Microsoft.Extensions.Hosting;
 using Orleans;
 using Orleans.Hosting;
 using System.Net;
-using System.Xml.Xsl;
 
 Console.WriteLine("Simulating GPS positioning");
 
@@ -14,9 +13,9 @@ var host = Host.CreateDefaultBuilder()
                 {
                     client.UseLocalhostClustering();
 
-                    // client.UseStaticClustering(new IPEndPoint(IPAddress.Loopback, 30000));
+                     // client.UseStaticClustering(new IPEndPoint(IPAddress.Loopback, 30000));
 
-                    // client.UseAzureStorageClustering(options => options.ConfigureTableServiceClient(Environment.GetEnvironmentVariable("POIAzure")));
+                     // client.UseAzureStorageClustering(options => options.ConfigureTableServiceClient(Environment.GetEnvironmentVariable("POIAzure")));
                 })
                 .Build();
 host.Start();
