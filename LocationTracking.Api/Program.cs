@@ -1,10 +1,12 @@
+using Orleans;
 using Orleans.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Host.UseOrleans((ctx, silo) =>
 {
-    silo.UseLocalhostClustering();
+    silo.UseLocalhostClustering()
+        .UseDashboard();
 });
 
 builder.Services.AddControllersWithViews();

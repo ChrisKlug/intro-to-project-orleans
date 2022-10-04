@@ -8,6 +8,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Orleans.Server" Version="4.0.0-preview2" />
+		<PackageReference Include="OrleansDashboard" Version="4.0.0-preview3" />
 	</ItemGroup>
 
 	<ItemGroup>
