@@ -5,15 +5,23 @@ using Microsoft.Extensions.Hosting;
 using Orleans;
 using Orleans.Hosting;
 using System.Net;
+using System.Xml.Xsl;
 
 Console.WriteLine("Simulating GPS positioning");
 
 var host = Host.CreateDefaultBuilder()
-                // Add Orleans
+                .UseOrleansClient((ctx, client) =>
+                {
+                    client.UseLocalhostClustering();
+
+                    // client.UseStaticClustering(new IPEndPoint(IPAddress.Loopback, 30000));
+
+                    // client.UseAzureStorageClustering(options => options.ConfigureTableServiceClient(Environment.GetEnvironmentVariable("POIAzure")));
+                })
                 .Build();
 host.Start();
 
-// Get ClusterClient
+var clusterClient = host.Services.GetRequiredService<IClusterClient>();
 
 var cts = new CancellationTokenSource();
 var tasks = new List<Task>();
@@ -21,11 +29,11 @@ for (int i = 1; i <= 10; i++)
 {
     var name = "Simulator " + i;
 
-    // Get Location Tracking Grain
+    var grain = clusterClient.GetGrain<ILocationTrackingGrain>(name);
 
     tasks.Add(new LocationSimulator(name, async (point) =>
     {
-        // Update location
+        await grain.UpdateLocation(point.ToLocation());
 
     }).Start(cts.Token));
 }
