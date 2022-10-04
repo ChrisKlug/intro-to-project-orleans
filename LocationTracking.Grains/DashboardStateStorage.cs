@@ -25,7 +25,7 @@ namespace LocationTracking.Grains
 
         public async Task ReadStateAsync<T>(string grainType, GrainReference grainReference, IGrainState<T> grainState)
         {
-            if (typeof(T) == typeof(DashboardGrain.DashboardState))
+            if (typeof(T) == typeof(LocationDashboardGrain.DashboardState))
             {
                 var fileName = Path.Combine(storagePath, "dashboardState.json");
                 if (File.Exists(fileName))
@@ -37,7 +37,7 @@ namespace LocationTracking.Grains
 
         public async Task WriteStateAsync<T>(string grainType, GrainReference grainReference, IGrainState<T> grainState)
         {
-            if (typeof(T) == typeof(DashboardGrain.DashboardState))
+            if (typeof(T) == typeof(LocationDashboardGrain.DashboardState))
             {
                 var fileName = Path.Combine(storagePath, "dashboardState.json");
                 if (File.Exists(fileName))

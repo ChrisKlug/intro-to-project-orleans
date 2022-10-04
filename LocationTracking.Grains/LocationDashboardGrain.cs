@@ -20,13 +20,13 @@ namespace LocationTracking.Grains
         void OnPositionsUpdated((string ClientId, Location Location)[] positions);
     }
 
-    public class DashboardGrain : Grain, IDashboardGrain
+    public class LocationDashboardGrain : Grain, IDashboardGrain
     {
         private HashSet<IDashboardObserver> observers = new();
         private IDisposable timer;
         private IPersistentState<DashboardState> state;
 
-        public DashboardGrain([PersistentState("DashboardState", "DashboardStateStorage")] IPersistentState<DashboardState> state)
+        public LocationDashboardGrain([PersistentState("DashboardState", "DashboardStateStorage")] IPersistentState<DashboardState> state)
         {
             Console.WriteLine("Creating DashboardGrain");
 

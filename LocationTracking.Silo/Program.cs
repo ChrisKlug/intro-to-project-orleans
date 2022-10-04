@@ -1,5 +1,6 @@
 ﻿using LocationTracking.Grains;
 using Microsoft.Extensions.Hosting;
+using Orleans;
 using Orleans.Hosting;
 using Orleans.Runtime;
 using Orleans.Storage;
@@ -9,7 +10,8 @@ using System.Net;
 var host = Host.CreateDefaultBuilder()
             .UseOrleans((ctx, silo) =>
             {
-                silo.UseLocalhostClustering();
+                silo.UseLocalhostClustering()
+                    .UseDashboard();
 
                 //var siloCount = Process.GetProcesses().Count(x => x.ProcessName == "LocationTracking.Silo");
                 //var portSpread = siloCount == 1 ? 0 : new Random().Next(1000);
@@ -19,7 +21,6 @@ var host = Host.CreateDefaultBuilder()
 
                 //silo.UseAzureStorageClustering(options => options.ConfigureTableServiceClient(Environment.GetEnvironmentVariable("POIAzure")))
                 //    .ConfigureEndpoints(IPAddress.Loopback, 11111 + portSpread, 30000 + portSpread);
-
 
                 silo.Services.AddSingletonNamedService<IGrainStorage>("DashboardStateStorage", (sp, name) =>
                 {
