@@ -18,12 +18,12 @@ namespace LocationTracking.Grains
             }
         }
 
-        public Task ClearStateAsync<T>(string grainType, GrainReference grainReference, IGrainState<T> grainState)
+        public Task ClearStateAsync<T>(string grainType, GrainId grainId, IGrainState<T> grainState)
         {
             throw new NotImplementedException();
         }
 
-        public async Task ReadStateAsync<T>(string grainType, GrainReference grainReference, IGrainState<T> grainState)
+        public async Task ReadStateAsync<T>(string grainType, GrainId grainId, IGrainState<T> grainState)
         {
             if (typeof(T) == typeof(LocationDashboardGrain.DashboardState))
             {
@@ -35,7 +35,7 @@ namespace LocationTracking.Grains
             }
         }
 
-        public async Task WriteStateAsync<T>(string grainType, GrainReference grainReference, IGrainState<T> grainState)
+        public async Task WriteStateAsync<T>(string grainType, GrainId grainId, IGrainState<T> grainState)
         {
             if (typeof(T) == typeof(LocationDashboardGrain.DashboardState))
             {

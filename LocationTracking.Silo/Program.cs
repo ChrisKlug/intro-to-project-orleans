@@ -1,4 +1,5 @@
 ﻿using LocationTracking.Grains;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Orleans;
 using Orleans.Hosting;
@@ -22,7 +23,7 @@ var host = Host.CreateDefaultBuilder()
                 //silo.UseAzureStorageClustering(options => options.ConfigureTableServiceClient(Environment.GetEnvironmentVariable("POIAzure")))
                 //    .ConfigureEndpoints(IPAddress.Loopback, 11111 + portSpread, 30000 + portSpread);
 
-                silo.Services.AddSingletonNamedService<IGrainStorage>("DashboardStateStorage", (sp, name) =>
+                silo.Services.AddKeyedSingleton<IGrainStorage>("DashboardStateStorage", (sp, name) =>
                 {
                     return new DashboardStateStorage("c:\\Temp\\OrleansStorage");
                 });
