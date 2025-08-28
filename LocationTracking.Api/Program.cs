@@ -11,7 +11,7 @@ builder.Host.UseOrleans((ctx, silo) =>
     silo.UseLocalhostClustering()
         .UseDashboard();
 
-    silo.Services.AddSingletonNamedService<IGrainStorage>("DashboardStateStorage", (sp, name) =>
+    silo.Services.AddKeyedSingleton<IGrainStorage>("DashboardStateStorage", (sp, name) =>
     {
         return new DashboardStateStorage("c:\\Temp\\OrleansStorage");
     });
